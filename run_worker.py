@@ -11,7 +11,7 @@ from agents import set_trace_processors
 
 # Import the activity and workflow from our other files
 from activities import execute_agent
-from workflows import AgentExecution
+from workflows import AgentExecution, BufferedAgentExecution
 
 
 temporal_playground_logger = braintrust.init_logger(
@@ -29,7 +29,7 @@ async def main():
         worker = Worker(
           client,
           task_queue="agent-execution",
-          workflows=[AgentExecution],
+          workflows=[AgentExecution, BufferedAgentExecution],
           activities=[execute_agent],
           activity_executor=activity_executor,
         )
